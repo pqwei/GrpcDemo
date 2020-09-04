@@ -1,0 +1,15 @@
+﻿syntax="proto3";
+package grpcDeal;
+
+service dealService{
+  rpc GetDeal (DealIdRequest) returns (DealReply){}
+}
+
+message DealIdRequest{
+  int32 id =1;
+}
+
+message DealReply{
+  string name=1;
+  string remark=2;
+}

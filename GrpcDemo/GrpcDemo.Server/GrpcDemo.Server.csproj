@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+ <ItemGroup>
+   <Protobuf Include="Protos\deal.proto" GrpcServices="Server" Link="Protos\deal.proto" />
+   <Protobuf Include="Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.31.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.31.0" />
+  </ItemGroup>
+
+
+</Project>

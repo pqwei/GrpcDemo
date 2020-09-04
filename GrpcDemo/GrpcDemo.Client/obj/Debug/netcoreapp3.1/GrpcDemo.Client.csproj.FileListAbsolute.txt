@@ -25,4 +25,3 @@ D:\GrpcDemo\GrpcDemo\GrpcDemo.Client\obj\Debug\netcoreapp3.1\GrpcDemo.Client.csp
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Client\obj\Debug\netcoreapp3.1\GrpcDemo.Client.dll
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Client\obj\Debug\netcoreapp3.1\GrpcDemo.Client.pdb
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Client\obj\Debug\netcoreapp3.1\GrpcDemo.Client.genruntimeconfig.cache
-D:\GrpcDemo\GrpcDemo\GrpcDemo.Client\obj\Debug\netcoreapp3.1\GrpcDemo.Client.csprojAssemblyReference.cache

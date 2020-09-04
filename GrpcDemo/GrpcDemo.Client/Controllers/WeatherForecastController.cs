@@ -29,8 +29,7 @@ namespace GrpcDemo.Client.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Hello";
-            var channel = GrpcChannel.ForAddress("http://localhost:8080");
+            var channel = GrpcChannel.ForAddress("http://localhost:5001");
             //var client = new dealService.dealServiceClient(channel);
             //var reply = client.GetDeal(
             //    new DealIdRequest { Id = 1 });

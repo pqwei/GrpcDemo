@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using GrpcDeal;
@@ -29,18 +30,31 @@ namespace GrpcDemo.Client.Controllers
         [HttpGet]
         public string Get()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            //var client = new dealService.dealServiceClient(channel);
-            //var reply = client.GetDeal(
-            //    new DealIdRequest { Id = 1 });
-            //Console.WriteLine("Greeter 服务返回数据: " + reply.Name+reply.Remark);
+            try
+            {
 
-            var client = new Greeter.GreeterClient(channel);
-            var reply = client.SayHello(
-                new HelloRequest { Name = "张三" });
-            Console.WriteLine("Greeter 服务返回数据: " + reply.Message);
+                var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
+                var httpClient = new HttpClient(httpClientHandler);
+                var channel = GrpcChannel.ForAddress("https://localhost:8080", new GrpcChannelOptions { HttpClient = httpClient });
 
-            return reply.Message;
+                //var channel = GrpcChannel.ForAddress("https://localhost:8080");
+
+                //var client = new dealService.dealServiceClient(channel);
+                //var reply = client.GetDeal(
+                //    new DealIdRequest { Id = 1 });
+                //Console.WriteLine("Greeter 服务返回数据: " + reply.Name+reply.Remark);
+
+                var client = new Greeter.GreeterClient(channel);
+                var reply = client.SayHello(
+                    new HelloRequest { Name = "张三" });
+                Console.WriteLine("Greeter 服务返回数据: " + reply.Message);
+
+                return reply.Message;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
         }
     }
 }

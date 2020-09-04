@@ -25,3 +25,4 @@ D:\GrpcDemo\GrpcDemo\GrpcDemo.Server\obj\Debug\netcoreapp3.1\GrpcDemo.Server.pdb
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Server\obj\Debug\netcoreapp3.1\GrpcDemo.Server.genruntimeconfig.cache
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Server\obj\Debug\netcoreapp3.1\GrpcDemo.Server.csproj.CoreCompileInputs.cache
 D:\GrpcDemo\GrpcDemo\GrpcDemo.Server\obj\Debug\netcoreapp3.1\GrpcDemo.Server.MvcApplicationPartsAssemblyInfo.cache
+D:\GrpcDemo\GrpcDemo\GrpcDemo.Server\obj\Debug\netcoreapp3.1\GrpcDemo.Server.csprojAssemblyReference.cache

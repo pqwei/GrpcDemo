@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GrpcDemo.Server</name>
+    </assembly>
+    <members>
+        <member name="T:GrpcDemo.Server.Common.Logger">
+            <summary>
+            写日志
+            </summary>
+        </member>
+        <member name="M:GrpcDemo.Server.Controllers.ValuesController.Get">
+            <summary>
+            获取数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:GrpcDemo.Server.Startup.provider">
+            <summary>
+            Api版本信息
+            </summary>
+        </member>
+        <member name="T:GrpcService1.GreetReflection">
+            <summary>Holder for reflection information generated from Protos/greet.proto</summary>
+        </member>
+        <member name="P:GrpcService1.GreetReflection.Descriptor">
+            <summary>File descriptor for Protos/greet.proto</summary>
+        </member>
+        <member name="T:GrpcService1.HelloRequest">
+            <summary>
+            The request message containing the user's name.
+            </summary>
+        </member>
+        <member name="F:GrpcService1.HelloRequest.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="T:GrpcService1.HelloReply">
+            <summary>
+            The response message containing the greetings.
+            </summary>
+        </member>
+        <member name="F:GrpcService1.HelloReply.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="F:GrpcService1.HelloReply.AgeFieldNumber">
+            <summary>Field number for the "Age" field.</summary>
+        </member>
+        <member name="F:GrpcService1.HelloReply.WeatherForecastsFieldNumber">
+            <summary>Field number for the "weatherForecasts" field.</summary>
+        </member>
+        <member name="F:GrpcService1.HelloReply.IDsFieldNumber">
+            <summary>Field number for the "IDs" field.</summary>
+        </member>
+        <member name="F:GrpcService1.WeatherForecast.DateFieldNumber">
+            <summary>Field number for the "Date" field.</summary>
+        </member>
+        <member name="F:GrpcService1.WeatherForecast.TemperatureCFieldNumber">
+            <summary>Field number for the "TemperatureC" field.</summary>
+        </member>
+        <member name="F:GrpcService1.WeatherForecast.TemperatureFFieldNumber">
+            <summary>Field number for the "TemperatureF" field.</summary>
+        </member>
+        <member name="F:GrpcService1.WeatherForecast.SummaryFieldNumber">
+            <summary>Field number for the "Summary" field.</summary>
+        </member>
+        <member name="T:GrpcService1.Greeter">
+            <summary>
+            The greeting service definition.
+            </summary>
+        </member>
+        <member name="P:GrpcService1.Greeter.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:GrpcService1.Greeter.GreeterBase">
+            <summary>Base class for server-side implementations of Greeter</summary>
+        </member>
+        <member name="M:GrpcService1.Greeter.GreeterBase.SayHello(GrpcService1.HelloRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Sends a greeting
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:GrpcService1.Greeter.BindService(GrpcService1.Greeter.GreeterBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:GrpcService1.Greeter.BindService(Grpc.Core.ServiceBinderBase,GrpcService1.Greeter.GreeterBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="T:GrpcDeal.DealReflection">
+            <summary>Holder for reflection information generated from Protos/deal.proto</summary>
+        </member>
+        <member name="P:GrpcDeal.DealReflection.Descriptor">
+            <summary>File descriptor for Protos/deal.proto</summary>
+        </member>
+        <member name="F:GrpcDeal.DealIdRequest.IdFieldNumber">
+            <summary>Field number for the "id" field.</summary>
+        </member>
+        <member name="F:GrpcDeal.DealReply.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="F:GrpcDeal.DealReply.RemarkFieldNumber">
+            <summary>Field number for the "remark" field.</summary>
+        </member>
+        <member name="P:GrpcDeal.dealService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:GrpcDeal.dealService.dealServiceBase">
+            <summary>Base class for server-side implementations of dealService</summary>
+        </member>
+        <member name="M:GrpcDeal.dealService.BindService(GrpcDeal.dealService.dealServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:GrpcDeal.dealService.BindService(Grpc.Core.ServiceBinderBase,GrpcDeal.dealService.dealServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+    </members>
+</doc>

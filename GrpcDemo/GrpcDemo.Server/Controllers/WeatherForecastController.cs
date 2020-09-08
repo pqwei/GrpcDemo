@@ -27,13 +27,19 @@ namespace GrpcDemo.Server.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var result = new List<WeatherForecast>();
+            var list= Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+            for (int i = 0; i < 10000; i++)
+            {
+                result.AddRange(list);
+            }
+            return result;
         }
     }
 }

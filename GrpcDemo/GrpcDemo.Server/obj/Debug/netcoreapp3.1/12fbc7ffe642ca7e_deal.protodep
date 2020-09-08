@@ -1,2 +1,0 @@
-obj\Debug\netcoreapp3.1\Protos/Deal.cs \
-obj\Debug\netcoreapp3.1\Protos/DealGrpc.cs: Protos/deal.proto

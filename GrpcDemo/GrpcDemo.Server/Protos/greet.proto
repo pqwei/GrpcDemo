@@ -18,4 +18,14 @@ message HelloRequest {
 // The response message containing the greetings.
 message HelloReply {
   string message = 1;
+  int32 Age = 2;
+  repeated WeatherForecast weatherForecasts = 3;
+  repeated int32  IDs = 4;
+}
+
+message WeatherForecast {
+   string Date=1;
+   int32 TemperatureC=2;
+   int32 TemperatureF=3;
+   string Summary=4;
 }

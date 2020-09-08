@@ -5,6 +5,13 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="新文件夹\**" />
+    <Content Remove="新文件夹\**" />
+    <EmbeddedResource Remove="新文件夹\**" />
+    <None Remove="新文件夹\**" />
+  </ItemGroup>
+
  <ItemGroup>
    <Protobuf Include="Protos\deal.proto" GrpcServices="Server" Link="Protos\deal.proto" />
    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
@@ -13,6 +20,14 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.31.0" />
     <PackageReference Include="Grpc.AspNetCore.Server" Version="2.31.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.7" />
+    <PackageReference Include="ZSFund.LogService.Api" Version="1.0.3" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="datacool.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 

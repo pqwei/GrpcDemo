@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\greet.proto" />
+  </ItemGroup>
   
   <ItemGroup>
    <Protobuf Include="Protos\deal.proto" GrpcServices="Client" Link="Protos\deal.proto" />
@@ -11,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.31.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

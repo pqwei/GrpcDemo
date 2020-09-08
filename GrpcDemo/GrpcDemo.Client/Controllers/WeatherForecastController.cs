@@ -48,10 +48,10 @@ namespace GrpcDemo.Client.Controllers
             //Console.WriteLine("Greeter 服务返回数据: " + reply.Name+reply.Remark);
 
 
-            HttpClient httpClient = new HttpClient(new HttpClientHandler());
-            var result = httpClient.GetStringAsync("http://10.100.0.97:44354/WeatherForecast").Result;
-            var list= JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
-            var str = JsonConvert.SerializeObject(list);
+            //HttpClient httpClient = new HttpClient(new HttpClientHandler());
+            //var result = httpClient.GetStringAsync("http://10.100.0.97:44354/WeatherForecast").Result;
+            //var list= JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
+            //var str = JsonConvert.SerializeObject(list);
               
             var client = new Greeter.GreeterClient(channel);
             var reply = client.SayHello(

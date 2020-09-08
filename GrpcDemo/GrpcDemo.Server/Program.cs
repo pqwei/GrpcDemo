@@ -40,7 +40,7 @@ namespace GrpcDemo.Server
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls("http://*:44354")
+                    .UseUrls("https://*:44354")
                     .UseStartup<Startup>();
                 });
 

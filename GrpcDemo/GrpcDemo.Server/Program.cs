@@ -33,14 +33,21 @@ namespace GrpcDemo.Server
             //Logger.Write("服务启动成功", string.Empty, string.Empty, string.Empty, LogLevel.Information, 0);
         }
 
-        // Additional configuration is required to successfully run gRPC on macOS.
-        // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls("https://*:44354")
+                    .ConfigureAppConfiguration((c, h) =>
+                    {
+                        h.AddJsonFile($"appsettings.json", true, true);
+                    })
+                    .UseUrls("http://*:44355")
                     .UseStartup<Startup>();
                 });
 

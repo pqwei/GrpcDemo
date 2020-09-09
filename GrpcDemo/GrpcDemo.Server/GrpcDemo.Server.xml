@@ -4,15 +4,60 @@
         <name>GrpcDemo.Server</name>
     </assembly>
     <members>
+        <member name="M:GrpcDemo.Server.Common.ClientUtil.ClientGet(System.String)">
+            <summary>
+            向ETIBooking提交Get请求
+            </summary>
+            <param name="url">请求的url</param>
+            <returns></returns>
+        </member>
+        <member name="M:GrpcDemo.Server.Common.ClientUtil.ClientPost(System.String,System.String)">
+            <summary>
+            以Post方式向ETIBooking提交请求
+            </summary>
+            <param name="action"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
         <member name="T:GrpcDemo.Server.Common.Logger">
             <summary>
             写日志
             </summary>
         </member>
-        <member name="M:GrpcDemo.Server.Controllers.ValuesController.Get">
+        <member name="M:GrpcDemo.Server.Controllers.ValuesController.GetA">
             <summary>
             获取数据
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GrpcDemo.Server.Controllers.ValuesController.GetB">
+            <summary>
+            获取数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GrpcDemo.Server.Controllers.WeatherForecastController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GrpcDemo.Server.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{GrpcDemo.Server.Controllers.WeatherForecastController},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:GrpcDemo.Server.Controllers.WeatherForecastController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GrpcDemo.Server.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
             <returns></returns>
         </member>
         <member name="F:GrpcDemo.Server.Startup.provider">

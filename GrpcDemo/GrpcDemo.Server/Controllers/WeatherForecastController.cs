@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrpcDemo.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace GrpcDemo.Server.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("[controller]")]
     [ApiController]
@@ -18,15 +23,25 @@ namespace GrpcDemo.Server.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IConfiguration _configuration;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var Name = _configuration.GetValue<String>("Kestrel:EndpointDefaults:HttpsInlineCertFile:Url");
             var rng = new Random();
             var result = new List<WeatherForecast>();
             var list= Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -43,16 +58,5 @@ namespace GrpcDemo.Server.Controllers
             return result;
         }
 
-
-        public class WeatherForecast
-        {
-            public DateTime Date { get; set; }
-
-            public int TemperatureC { get; set; }
-
-            public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-            public string Summary { get; set; }
-        }
     }
 }

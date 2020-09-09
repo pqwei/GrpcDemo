@@ -27,6 +27,7 @@ namespace GrpcService1
             {
                 Date = DateTime.Now.AddDays(index).ToString(),
                 TemperatureC = rng.Next(-20, 55),
+                TemperatureF= 32 + (int)(rng.Next(-20, 55) / 0.5556),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();

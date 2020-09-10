@@ -41,6 +41,7 @@ namespace GrpcDemo.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var a= Configuration.GetValue<int>("AppId", 12345);
             var Name = _configuration.GetValue<String>("Kestrel:EndpointDefaults:HttpsInlineCertFile:Url");
             var rng = new Random();
             var result = new List<WeatherForecast>();

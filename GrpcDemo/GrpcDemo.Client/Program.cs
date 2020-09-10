@@ -20,7 +20,9 @@ namespace GrpcDemo.Client
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                    .UseUrls("https://*:44366")
+                    .UseStartup<Startup>();
                 });
     }
 }

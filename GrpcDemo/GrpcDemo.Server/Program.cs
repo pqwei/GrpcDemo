@@ -47,7 +47,7 @@ namespace GrpcDemo.Server
                     {
                         h.AddJsonFile($"appsettings.json", true, true);
                     })
-                    .UseUrls("http://*:44355")
+                    .UseUrls("https://*:44355")
                     .UseStartup<Startup>();
                 });
 

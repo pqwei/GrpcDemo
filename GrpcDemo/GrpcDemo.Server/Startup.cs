@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using GrpcDemo.Server.Services;
 using GrpcService1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -80,19 +79,6 @@ namespace GrpcDemo.Server
                 c.IncludeXmlComments(xmlPath, true);
                 #endregion
 
-                #region 启用swagger验证功能
-                //添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称一致即可，CoreAPI。
-                //var security = new Dictionary<string, IEnumerable<string>> { { "CoreAPI", new string[] { } }, };
-                //c.AddSecurityRequirement(security);
-                //c.AddSecurityDefinition("CoreAPI", new ApiKeyScheme
-                //{
-                //    Description = "JWT授权(数据将在请求头中进行传输) 在下方输入Bearer {token} 即可",
-                //    Name = "Authorization",//jwt默认的参数名称
-                //    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
-                //    Type = "apiKey"
-                //});
-                #endregion
-
             });
 
 
@@ -114,16 +100,10 @@ namespace GrpcDemo.Server
             {
                 foreach (var item in provider.ApiVersionDescriptions)
                 {
-                    //c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoreAPI"); 单版本
                     c.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", "CoreAPI" + item.ApiVersion);
                 }
                 c.RoutePrefix = string.Empty;
             });
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API-v1");
-            //    c.RoutePrefix = string.Empty;
-            //});
 
             app.UseHttpsRedirection();
 
@@ -133,7 +113,6 @@ namespace GrpcDemo.Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<DealService>();
                 endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>

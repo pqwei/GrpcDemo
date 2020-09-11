@@ -12,7 +12,6 @@
   </PropertyGroup>
 
  <ItemGroup>
-   <Protobuf Include="Protos\deal.proto" GrpcServices="Server" Link="Protos\deal.proto" />
    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" Link="Protos\greet.proto" />
   </ItemGroup>
   

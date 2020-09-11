@@ -6,7 +6,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-   <Protobuf Include="Protos\deal.proto" GrpcServices="Client" Link="Protos\deal.proto" />
    <Protobuf Include="Protos\greet.proto" GrpcServices="Client" Link="Protos\greet.proto" />
   </ItemGroup>
 
@@ -17,6 +16,9 @@
 
   <ItemGroup>
     <None Update="datacool.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="socialnetwork.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

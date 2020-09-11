@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GrpcDeal;
+using GrpcService1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,16 +28,6 @@ namespace GrpcDemo.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-
-            //services.AddGrpcClient<Greeter.GreeterClient>(options =>
-            //{
-            //    options.Address = new Uri("https://localhost:5001");
-            //});
-            //services.AddGrpcClient<dealService.dealServiceClient>(options =>
-            //{
-            //    options.Address = new Uri("https://localhost:5001");
-            //});
-
             services.AddControllers();
         }
 

@@ -9,7 +9,6 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
-using GrpcDeal;
 using GrpcService1;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,25 +35,20 @@ namespace GrpcDemo.Client.Controllers
         [HttpGet]
         public string Get()
         {
-            var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
+            //Http客户端
+            var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback 
+                = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
             var httpClient = new HttpClient(httpClientHandler);
-            var gRPCChannel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
 
+            httpClient = new HttpClient();
+
+            //gRPC客户端
+            var gRPCChannel = GrpcChannel.ForAddress("https://localhost:44355",
+                new GrpcChannelOptions { HttpClient = httpClient });
             var gRPCClient = new Greeter.GreeterClient(gRPCChannel);
-            List<int> timesList = new List<int> { 10, 100, 1000 };
 
-            var resultA = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast?count=10").Result;
-            var listA = JsonConvert.DeserializeObject<List<WeatherForecast>>(resultA);
-
-            var replyA = gRPCClient.SayHello(
-                        new HelloRequest
-                        {
-                            Name = "张三",
-                            Count = 10
-                        });
-
-            int count = 100000;
-
+            List<int> timesList = new List<int> { 10, 100, 1000 };//调用次数
+            int count = 10;//记录总数
             Console.WriteLine($"{count}条数据测试结果:\n");
             foreach (var times in timesList)
             {
@@ -108,8 +102,6 @@ namespace GrpcDemo.Client.Controllers
             public DateTime Date { get; set; }
 
             public int TemperatureC { get; set; }
-
-            public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
             public string Summary { get; set; }
         }

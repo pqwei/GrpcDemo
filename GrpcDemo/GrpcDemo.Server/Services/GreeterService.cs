@@ -22,25 +22,19 @@ namespace GrpcService1
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
             var rng = new Random();
-            var result = new List<WeatherForecast>();
-            var list = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var list = Enumerable.Range(1, request.Count).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index).ToString(),
                 TemperatureC = rng.Next(-20, 55),
-                TemperatureF= 32 + (int)(rng.Next(-20, 55) / 0.5556),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            for (int i = 0; i < 2500; i++)
-            {
-                result.AddRange(list);
-            }
             var reply = new HelloReply()
             {
                 Message = "Hello " + request.Name,
                 Age = 10,
             };
-            reply.WeatherForecasts.AddRange(result);
+            reply.WeatherForecasts.AddRange(list);
             return Task.FromResult(reply);
         }
     }

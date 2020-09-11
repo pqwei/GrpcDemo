@@ -35,28 +35,24 @@ namespace GrpcDemo.Server.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 获取数据
         /// </summary>
+        /// <param name="count">数据总量</param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecast> Get(int? count)
         {
-            //var a= _configuration.GetValue<int>("AppId", 12345);
             //var Name = _configuration.GetValue<String>("Kestrel:EndpointDefaults:HttpsInlineCertFile:Url");
             var rng = new Random();
             var result = new List<WeatherForecast>();
-            var list= Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var list = Enumerable.Range(1, count.GetValueOrDefault()).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            for (int i = 0; i < 2500; i++)
-            {
-                result.AddRange(list);
-            }
-            return result;
+            return list;
         }
 
     }

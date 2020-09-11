@@ -36,41 +36,39 @@ namespace GrpcDemo.Client.Controllers
         [HttpGet]
         public string Get()
         {
-            //         AppContext.SetSwitch(
-            //"System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-
             var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
             var httpClient = new HttpClient(httpClientHandler);
-            //     var channel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
-
             var gRPCChannel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
 
-            //var client = new dealService.dealServiceClient(channel);
-            //var reply = client.GetDeal(
-            //    new DealIdRequest { Id = 1 });
-            //Console.WriteLine("Greeter 服务返回数据: " + reply.Name+reply.Remark);
-
-            //var httpclientHandler = new HttpClientHandler();
-            //httpclientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, error) => true;
-
-            //var httpClient = new HttpClient(new HttpClientHandler());
             var gRPCClient = new Greeter.GreeterClient(gRPCChannel);
             List<int> timesList = new List<int> { 10, 100, 1000 };
 
-            var resultA = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+            var resultA = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast?count=10").Result;
             var listA = JsonConvert.DeserializeObject<List<WeatherForecast>>(resultA);
 
             var replyA = gRPCClient.SayHello(
-                        new HelloRequest { Name = "张三" });
+                        new HelloRequest
+                        {
+                            Name = "张三",
+                            Count = 10
+                        });
 
+            int count = 100000;
+
+            Console.WriteLine($"{count}条数据测试结果:\n");
             foreach (var times in timesList)
             {
-
+                string httpsUrl = $"https://127.0.0.1:44355/WeatherForecast?count={count}";
+                var gRPCRequest = new HelloRequest
+                {
+                    Name = "张三",
+                    Count = count
+                };
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 for (int i = 0; i < times; i++)
                 {
-                    var result = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+                    var result = httpClient.GetStringAsync(httpsUrl).Result;
                     var list = JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
                 }
                 stopWatch.Stop();
@@ -79,8 +77,7 @@ namespace GrpcDemo.Client.Controllers
                 stopWatch.Restart();
                 for (int i = 0; i < times; i++)
                 {
-                    var reply = gRPCClient.SayHello(
-                        new HelloRequest { Name = "张三" });
+                    var reply = gRPCClient.SayHello(gRPCRequest);
                 }
                 stopWatch.Stop();
                 Console.WriteLine($"循环调用{times}次gRPC:{stopWatch.ElapsedMilliseconds}ms");
@@ -88,7 +85,7 @@ namespace GrpcDemo.Client.Controllers
                 stopWatch.Restart();
                 Parallel.For(0, times, o =>
                 {
-                    var result = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+                    var result = httpClient.GetStringAsync(httpsUrl).Result;
                     var list = JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
                 });
                 stopWatch.Stop();
@@ -97,13 +94,10 @@ namespace GrpcDemo.Client.Controllers
                 stopWatch.Restart();
                 Parallel.For(0, times, o =>
                 {
-                    var reply = gRPCClient.SayHello(
-                        new HelloRequest { Name = "张三" });
+                    var reply = gRPCClient.SayHello(gRPCRequest);
                 });
                 stopWatch.Stop();
-                Console.WriteLine($"并发调用{times}次gRPC:{stopWatch.ElapsedMilliseconds}ms");
-                Console.WriteLine();
-                Console.WriteLine();
+                Console.WriteLine($"并发调用{times}次gRPC:{stopWatch.ElapsedMilliseconds}ms\n\n");
             }
 
             return "结束啦!";

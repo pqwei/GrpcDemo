@@ -13,6 +13,7 @@ service Greeter {
 // The request message containing the user's name.
 message HelloRequest {
   string name = 1;
+  int32 count = 2;
 }
 
 // The response message containing the greetings.
@@ -26,6 +27,5 @@ message HelloReply {
 message WeatherForecast {
    string Date=1;
    int32 TemperatureC=2;
-   int32 TemperatureF=3;
-   string Summary=4;
+   string Summary=3;
 }

@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using GrpcDeal;
@@ -29,38 +34,79 @@ namespace GrpcDemo.Client.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public string Get()
         {
-       //         AppContext.SetSwitch(
-       //"System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            //         AppContext.SetSwitch(
+            //"System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
-       //     var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
-       //     var httpClient = new HttpClient(httpClientHandler);
-       //     var channel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
+            var httpClientHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator };
+            var httpClient = new HttpClient(httpClientHandler);
+            //     var channel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
 
-            var channel = GrpcChannel.ForAddress("https://localhost:44355");
+            var gRPCChannel = GrpcChannel.ForAddress("https://localhost:44355", new GrpcChannelOptions { HttpClient = httpClient });
 
             //var client = new dealService.dealServiceClient(channel);
             //var reply = client.GetDeal(
             //    new DealIdRequest { Id = 1 });
             //Console.WriteLine("Greeter 服务返回数据: " + reply.Name+reply.Remark);
 
+            //var httpclientHandler = new HttpClientHandler();
+            //httpclientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, error) => true;
 
-            //HttpClient httpClient = new HttpClient(new HttpClientHandler());
-            //var result = httpClient.GetStringAsync("http://10.100.0.97:44355/WeatherForecast").Result;
-            //var list = JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
-            //var str = JsonConvert.SerializeObject(list);
+            //var httpClient = new HttpClient(new HttpClientHandler());
+            var gRPCClient = new Greeter.GreeterClient(gRPCChannel);
+            List<int> timesList = new List<int> { 10, 100, 1000 };
 
-            var client = new Greeter.GreeterClient(channel);
-            var reply = client.SayHello(
-                new HelloRequest { Name = "张三" });
-            Console.WriteLine("Greeter 服务返回数据: " + reply.Message);
+            var resultA = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+            var listA = JsonConvert.DeserializeObject<List<WeatherForecast>>(resultA);
 
-            return reply.WeatherForecasts.Select(o => new WeatherForecast
+            var replyA = gRPCClient.SayHello(
+                        new HelloRequest { Name = "张三" });
+
+            foreach (var times in timesList)
             {
-                Summary=o.Summary,
-                 TemperatureC=o.TemperatureC
-            });
+
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+                for (int i = 0; i < times; i++)
+                {
+                    var result = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+                    var list = JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
+                }
+                stopWatch.Stop();
+                Console.WriteLine($"循环调用{times}次WebApi:{stopWatch.ElapsedMilliseconds}ms");
+
+                stopWatch.Restart();
+                for (int i = 0; i < times; i++)
+                {
+                    var reply = gRPCClient.SayHello(
+                        new HelloRequest { Name = "张三" });
+                }
+                stopWatch.Stop();
+                Console.WriteLine($"循环调用{times}次gRPC:{stopWatch.ElapsedMilliseconds}ms");
+
+                stopWatch.Restart();
+                Parallel.For(0, times, o =>
+                {
+                    var result = httpClient.GetStringAsync("https://127.0.0.1:44355/WeatherForecast").Result;
+                    var list = JsonConvert.DeserializeObject<List<WeatherForecast>>(result);
+                });
+                stopWatch.Stop();
+                Console.WriteLine($"并发调用{times}次WebApi:{stopWatch.ElapsedMilliseconds}ms");
+
+                stopWatch.Restart();
+                Parallel.For(0, times, o =>
+                {
+                    var reply = gRPCClient.SayHello(
+                        new HelloRequest { Name = "张三" });
+                });
+                stopWatch.Stop();
+                Console.WriteLine($"并发调用{times}次gRPC:{stopWatch.ElapsedMilliseconds}ms");
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+
+            return "结束啦!";
         }
 
         public class WeatherForecast

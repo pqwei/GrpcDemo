@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcDemo.Server.Common;
@@ -47,7 +48,6 @@ namespace GrpcDemo.Server
                     {
                         h.AddJsonFile($"appsettings.json", true, true);
                     })
-                    .UseUrls("https://*:44355")
                     .UseStartup<Startup>();
                 });
 

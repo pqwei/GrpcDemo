@@ -41,8 +41,8 @@ namespace GrpcDemo.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var a= _configuration.GetValue<int>("AppId", 12345);
-            var Name = _configuration.GetValue<String>("Kestrel:EndpointDefaults:HttpsInlineCertFile:Url");
+            //var a= _configuration.GetValue<int>("AppId", 12345);
+            //var Name = _configuration.GetValue<String>("Kestrel:EndpointDefaults:HttpsInlineCertFile:Url");
             var rng = new Random();
             var result = new List<WeatherForecast>();
             var list= Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -52,7 +52,7 @@ namespace GrpcDemo.Server.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 2500; i++)
             {
                 result.AddRange(list);
             }

@@ -31,7 +31,7 @@ namespace GrpcService1
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 2500; i++)
             {
                 result.AddRange(list);
             }

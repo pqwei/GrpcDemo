@@ -65,9 +65,9 @@ namespace GrpcDemo.Server
                         Description = "ASP.NET CORE WebApi",
                         Contact = new OpenApiContact
                         {
-                            Name = "Jee",
-                            Email = "xiaomaprincess@gmail.com",
-                            Url = new Uri("https://www.cnblogs.com/jixiaosa/")
+                            Name = "Œ∫≈Û«ø",
+                            Email = "1531258932@qq.com",
+                            Url = new Uri("https://cn.bing.com/")
                         }
                     });
                 }
